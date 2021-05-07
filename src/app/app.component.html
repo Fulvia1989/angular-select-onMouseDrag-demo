@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+  <div class="students-list">
+    <div class="list-item" *ngFor="let student of students" [class.selected]="student.selected" 
+    (click)="select(student)"  (mouseenter)="onMouseOver($event, student)" (mouseleave)="onMouseOver($event, student)">
+      {{student.first_name}} {{student.last_name}}
+
+    </div>
+    
+  </div>
+   
+  <div class="buttons">
+    <button class="cancel-btn" (click)="resetSelection()"
+    *ngIf="selected.length!==0"> 
+    <i class="ri-close-line"></i> 
+  </button>
+  </div>
+
+  <div class="class-list">
+    <div class="room" *ngFor="let class of classrooms">
+      <h3>{{class.name}}</h3>
+      <small>available seats: {{class.seatsN}}</small>
+
+     
+      <div class="seats">
+        <button class="assign-btn" *ngIf="selected.length!==0" (click)="assignTo(class)">
+          <i class="ri-arrow-right-line"></i>
+        </button>
+        <div class="icon" *ngFor="let student of class.students">
+            {{getInitials(student)}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
